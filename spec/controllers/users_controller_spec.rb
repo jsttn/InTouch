@@ -30,5 +30,41 @@ describe UsersController do
     end
   end 
   
-  
-end
+  describe "POST 'create'" do
+    
+    describe "failure" do
+      
+      before(:each) do
+        @attr = { :name => "", :email => "", :password => "", :password_confirmation => "" }
+      end
+      
+      it "should not create a user" do
+        lambda do
+          post :create, :user => @attr
+        end.should_not change(User, :count)
+      end 
+      
+      it "should render the 'new' page" do
+        post :create, :user => @attr
+        response.should render_template('new')
+      end
+    end
+    
+    describe "success" do
+      
+      before(:each) do
+        @attr = { :name => "New User", :email => "user@example.com", :password => "password", :password_confirmation => "password" }
+      end 
+      
+      it "should create a user" do
+        lambda do
+          post :create, :user => @attr
+        end.should change(User, :count).by(1)
+      end 
+      it "should have a welcome message" do
+              post :create, :user => @attr
+              flash[:success].should =~ /Welcome to InTouch/i
+      end
+    end
+  end 
+end 
