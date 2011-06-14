@@ -29,3 +29,4 @@ RSpec.configure do |config|
     controller.sign_in(user)
   end 
 end
+

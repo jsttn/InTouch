@@ -32,14 +32,15 @@ describe User do
           valid_email_user = User.new(@attr.merge(:email => address))
           valid_email_user.should be_valid
         end
-  end 
+  end
+   
       
   it "should reject invalid email addresses" do
       addresses = %w[user@foo,com user_at_foo.org example.user@foo.]
         addresses.each do |address|
           invalid_email_user = User.new(@attr.merge(:email => address))
           invalid_email_user.should_not be_valid
-        end
+      end
   end     
   
   it "should reject duplicate email addresses" do
@@ -78,7 +79,7 @@ describe User do
         long = "a" * 41
         hash = @attr.merge(:password => long, :password_confirmation => long)
         User.new(hash).should_not be_valid
-    end
+     end
   end
   
   describe "password encryption" do
@@ -94,6 +95,7 @@ describe User do
     it "should have an encrypted password attribute" do
       @user.should respond_to(:encrypted_password)
     end
+  
     
     describe "has_password? method" do
       
@@ -104,9 +106,9 @@ describe User do
       it "should return false if the passwords don't match" do
         @user.has_password?("invalid").should be_false
       end 
-    end
+  end
     
-    describe "authenticate method" do
+  describe "authenticate method" do
       
       it "should return nil on email/password mismatch" do
         wrong_password_user = User.authenticate(@attr[:email], "wrongpass")
@@ -122,6 +124,26 @@ describe User do
         matching_user = User.authenticate(@attr[:email], @attr[:password])
         matching_user.should == @user
       end 
-    end 
+  end
+  end 
+    
+  describe "admin attribute" do
+    
+    before(:each) do
+         @user = User.create!(@attr)
+    end
+
+    it "should respond to admin" do
+      @user.should respond_to(:admin)
+    end
+
+    it "should not be an admin by default" do
+      @user.should_not be_admin
+    end
+
+    it "should be convertible to an admin" do
+      @user.toggle!(:admin)
+      @user.should be_admin
+    end
   end 
 end
