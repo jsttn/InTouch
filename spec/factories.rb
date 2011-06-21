@@ -3,6 +3,7 @@ Factory.define :user do |user|
   user.email                 "mhartl@example.com"
   user.password              "foobar"
   user.password_confirmation "foobar"
+  user.phonenumber           "5555555555"
 end
 
 Factory.sequence :email do |n|

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110613011542) do
+ActiveRecord::Schema.define(:version => 20110621152934) do
 
   create_table "users", :force => true do |t|
     t.string   "name"
@@ -20,6 +20,10 @@ ActiveRecord::Schema.define(:version => 20110613011542) do
     t.string   "encrypted_password"
     t.string   "salt"
     t.boolean  "admin",              :default => false
+    t.string   "phonenumber"
+    t.string   "cell"
+    t.string   "work"
+    t.string   "twitter"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

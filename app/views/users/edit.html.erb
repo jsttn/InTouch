@@ -18,12 +18,32 @@
     <%= f.label :password_confirmation, "Confirmation" %><br />
     <%= f.password_field :password_confirmation %>
   </div>
+  <div>
+    <%= gravatar_for @user %>
+    <a href="http://gravatar.com/emails">change</a>
+  </div>
+Contact Info:
+  <div class="field">
+    <%= f.label "Home Phone Number (Optional)" %><br />
+    <%= f.text_field :phonenumber %>
+  </div>
+  <div class="field">
+    <%= f.label "Cell Phone Number (Optional)" %><br />
+    <%= f.text_field :cell %>
+  </div>
+  <div class="field">
+    <%= f.label "Work Phone Number (Optional)" %><br />
+    <%= f.text_field :work %>
+  </div>
+  <div class="field">
+    <%= f.label "Twitter Handle (Optional)" %><br />
+    <%= f.text_field :twitter, :placeholder => 'Do not use the @ sign' %>
+  </div>
   <div class="actions">
     <%= f.submit "Update" %>
   </div>
+  
 <% end %>
 
-<div>
-  <%= gravatar_for @user %>
-  <a href="http://gravatar.com/emails">change</a>
-</div>
+  
+
